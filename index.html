@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Stay Finder | Unique Stays Booking</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #2c3e50;
+            padding: 15px 0;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: center;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #34495e;
+        }
+
+        /* Featured Stays */
+        .featured-stays {
+            padding: 50px 0;
+        }
+
+        .featured-stays h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+
+        .stays-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .stay-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .stay-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stay-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .stay-card-content {
+            padding: 20px;
+        }
+
+        .stay-card h3 {
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .stay-card p {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        .stay-card .price {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+
+        .stay-card .type {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+        }
+
+        .stay-card .location {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* Destinations Section */
+        .destinations {
+            padding: 50px 0;
+            background-color: #ecf0f1;
+        }
+
+        .destinations h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            color: #2c3e50;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .destination-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .destination-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .destination-card h3 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            padding: 50px 0;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        #newsletterForm {
+            display: flex;
+            justify-content: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #newsletterForm input {
+            padding: 12px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            flex: 1;
+        }
+
+        #newsletterForm button {
+            padding: 12px 20px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #newsletterForm button:hover {
+            background-color: #c0392b;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a252f;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul li {
+                margin-bottom: 5px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Adventure Stay Finder</h1>
+            <p>Discover your perfect wilderness escape</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Stays</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="featured-stays">
+        <div class="container">
+            <h2>Featured Stays</h2>
+            <div class="stays-grid" id="staysGrid">
+                <!-- Stays will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <section class="destinations">
+        <div class="container">
+            <h2>Popular Destinations</h2>
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Rocky Mountains">
+                    <h3>Rocky Mountains</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Pacific Northwest">
+                    <h3>Pacific Northwest</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Sahara Desert">
+                    <h3>Sahara Desert</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="">
+                    <h3>Amazon Rainforest</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Alaskan Wilderness">
+                    <h3>Alaskan Wilderness</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="New Zealand">
+                    <h3>New Zealand</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Swiss Alps">
+                    <h3>Swiss Alps</h3>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Iceland">
+                    <h3>Iceland</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <h2>Get Adventure Updates</h2>
+            <p>Subscribe to our newsletter for the latest unique stays and special offers</p>
+            <form id="newsletterForm">
+                <input type="email" placeholder="Your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Adventure Stay Finder. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data for stays
+        const stays = [
+            {
+                id: 1,
+                name: "Enchanted Treehouse",
+                description: "A magical treehouse nestled in the redwoods with stunning views.",
+                price: 199,
+                type: "treehouse",
+                image: "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                location: "Redwood Forest, California"
+            },
+            {
+                id: 2,
+                name: "Wilderness Forest Camp",
+                description: "Experience nature at its finest in our secluded forest camp.",
+                price: 129,
+                type: "forest-camp",
+                image: "https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                location: "Olympic National Park, Washington"
+            },
+            {
+                id: 3,
+                name: "Mountain Off-Road Retreat",
+                description: "Remote cabin accessible only by 4x4 with breathtaking mountain views.",
+                price: 179,
+                type: "off-road",
+                image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                location: "Rocky Mountains, Colorado"
+            },
+            {
+                id: 4,
+                name: "Lakeside Cabin",
+                description: "Cozy cabin right on the lake shore with private dock.",
+                price: 159,
+                type: "cabin",
+                image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                location: "Lake Tahoe, Nevada"
+            },
+            {
+                id: 5,
+                name: "Canopy Treehouse Suite",
+                description: "Luxurious treehouse with modern amenities among the treetops.",
+                price: 249,
+                type: "treehouse",
+                image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                location: "Portland, Oregon"
+            },
+            {
+                id: 6,
+                name: "Desert Off-Grid Oasis",
+                description: "Unique stay in the desert with stunning night skies.",
+                price: 169,
+                type: "off-road",
+                image: "https://images.unsplash.com/photo-1506197603052-3cc9c3a201bd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                location: "Moab, Utah"
+            },
+            {
+                id: 7,
+                name: "Alpine Glass Cabin",
+                description: "Stunning glass cabin with panoramic mountain views.",
+                price: 299,
+                type: "cabin",
+                image: "https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                location: "Swiss Alps, Switzerland"
+            },
+            {
+                id: 8,
+                name: "Jungle Treehouse Resort",
+                description: "Eco-friendly treehouses in the heart of the rainforest.",
+                price: 219,
+                type: "treehouse",
+                image: "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+                location: "Costa Rica"
+            }
+        ];
+
+        // Display stays on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            displayStays(stays);
+        });
+
+        // Function to display stays
+        function displayStays(staysToDisplay) {
+            const staysGrid = document.getElementById('staysGrid');
+            staysGrid.innerHTML = '';
+
+            staysToDisplay.forEach(stay => {
+                const stayCard = document.createElement('div');
+                stayCard.className = 'stay-card';
+                stayCard.innerHTML = `
+                    <img src="${stay.image}" alt="${stay.name}">
+                    <div class="stay-card-content">
+                        <h3>${stay.name}</h3>
+                        <p>${stay.description}</p>
+                        <div class="price">$${stay.price}/night</div>
+                        <div class="location">${stay.location}</div>
+                        <span class="type">${formatStayType(stay.type)}</span>
+                    </div>
+                `;
+                staysGrid.appendChild(stayCard);
+            });
+        }
+
+        // Format stay type for display
+        function formatStayType(type) {
+            return type.split('-').map(word => 
+                word.charAt(0).toUpperCase() + word.slice(1)
+            ).join(' ');
+        }
+
+        // Newsletter form functionality
+        const newsletterForm = document.getElementById('newsletterForm');
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input').value;
+            alert(Thank you for subscribing with ${email}! You'll receive adventure updates soon.);
+            this.reset();
+        });
+    </script>
+</body>
+</html>
